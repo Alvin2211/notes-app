@@ -1,0 +1,218 @@
+.landing-container {
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+/* Header */
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #3a86ff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #3a86ff;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 40px;
+  background-color: #ffffff;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 50%;
+  animation: fadeSlideUp 1s ease-out;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+
+.hero-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.hero-text button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #3a86ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-text button:hover {
+  background-color: #265df2;
+  transform: translateY(-2px);
+}
+
+.hero-image {
+  max-width: 40%;
+  border-radius: 8px;
+  animation: floatUpDown 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+}
+
+.hero-image:hover {
+  transform: scale(1.03);
+}
+
+/* Animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Adjustments */
+
+/* Tablets and small laptops */
+@media (max-width: 1024px) {
+  .hero-text {
+    max-width: 60%;
+  }
+  .hero-image {
+    max-width: 35%;
+  }
+}
+
+/* Medium screens like tablets */
+@media (max-width: 768px) {
+  .landing-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-text, .hero-image {
+    max-width: 100%;
+  }
+
+  .hero-image {
+    margin-top: 30px;
+  }
+
+  .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .landing-header {
+    padding: 16px 20px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .hero-text p {
+    font-size: 0.95rem;
+  }
+
+  .hero-text button {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+
+  .hero-image {
+    margin-top: 20px;
+  }
+}
+
+.logo-picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.logo-picture img {
+  width: 50px; /* Adjust size as needed */
+  height: auto;
+  border-radius: 8px; /* Optional: for rounded corners */
+}
+
+.register-btn {
+
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin: auto;
+  
+}
+
+.register-btn:hover {
+  
+  transform: translateY(-2px);
+}

@@ -1,6 +1,6 @@
 /* Make body cover entire screen with dark bg */
 .body_wrapper {
-  background-color: #0e0e0e;
+  background-color: #121212 !important;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;

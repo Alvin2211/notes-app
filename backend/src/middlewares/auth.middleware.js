@@ -2,13 +2,15 @@
 import { ApiError } from "../utils/ApiError.js";
 import jwt from "jsonwebtoken"
 import { User } from "../models/user.models.js";
+import { loginUser } from "../controllers/users.controllers.js";
 
 export const verifyJWT = async(req, _, next) => {
     try {
+
+
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
-        
         if (!token) {
-            throw new ApiError(401, "Unauthorized request")
+            throw new ApiError(401, "Unauthorised request")
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
@@ -21,9 +23,10 @@ export const verifyJWT = async(req, _, next) => {
         }
     
         req.user = user;
-        next()
+        next();
     } catch (error) {
-        throw new ApiError(401, error?.message || "Invalid access token")
+        console.log("this is error",error)
+        throw new ApiError(401, "Invalid access hello token")
     }
     
 }

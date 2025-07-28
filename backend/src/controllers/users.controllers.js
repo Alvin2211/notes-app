@@ -1,5 +1,6 @@
 import { User } from "../models/user.models.js";
 import { ApiError } from "../utils/ApiError.js";
+import {verifyJWT } from "../middlewares/auth.middleware.js";
 
 const generateTokens = async (userId) => {
     try {
@@ -10,13 +11,13 @@ const generateTokens = async (userId) => {
         user.refreshToken = refreshToken;
         await user.save({ validateBeforeSave: false });
 
-        return { accessToken, refreshToken };
+        return {accessToken, refreshToken };
 
 
     } catch (error) {
         throw new ApiError(500, "Error generating tokens")
 
-    } y
+    } 
 }
 
 const registerUser = async (req, res) => {
@@ -70,7 +71,7 @@ const loginUser = async (req, res) => {
             throw new ApiError(401, "Invalid user credentials");
         }
 
-        const { accessToken, refreshToken } = await generateTokens(user._id)
+        const {accessToken, refreshToken} = await generateTokens(user._id)
 
         const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
@@ -90,7 +91,8 @@ const loginUser = async (req, res) => {
                 refreshToken,
                 user: loggedInUser,
             });
-
+            
+        
     }
     catch (error) {
         const statusCode = error.statusCode || 500;
@@ -117,7 +119,8 @@ const logoutUser = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: true
+            secure: "production" === process.env.NODE_ENV,
+            sameSite: "strict", 
         }
 
         return res

@@ -12,7 +12,7 @@ const Register = () => {
             <div className='input_container'>   
                 <input type="text" className="user_input" placeholder='Enter your Name' />
                 <input type="email" className='user_input' placeholder='Enter your Email' />
-                <input type="password" className='user_input' placeholder='Create Password' />
+                <input type="password" className='user_input' placeholder='Enter Password' />
                 <input type="password" className='user_input' placeholder='Confirm Password' />
             </div>
             <div className='terms_container'>   

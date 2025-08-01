@@ -1,5 +1,5 @@
 PORT = 8000
-MONGODB_URI =mongodb+srv://Notes-app:user12345@cluster0.sapm8nh.mongodb.net
+MONGODB_URI =mongodb+srv://Notes-apafvewfvp:user123sfvsefve45@cluster015.sapm8nh.mongodb.net
 
 ACCESS_TOKEN_SECRET =alvin123
 REFRESH_TOKEN_SECRET =alvin1234

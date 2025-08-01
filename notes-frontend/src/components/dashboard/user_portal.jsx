@@ -232,7 +232,7 @@ const UserPortal = () => {
             )}
           </div>
           <div className="navbar-actions">
-            
+
 
             {activeNoteId && (
               <>
@@ -257,7 +257,7 @@ const UserPortal = () => {
                 </button>
 
               </>
-              
+
             )}
 
             <button
@@ -279,12 +279,29 @@ const UserPortal = () => {
             </button>
           </div>
         </div>
+        {isEditing ? (
+          <button
+            className="bg-blue-500 text-white px-4 py-1 rounded"
+            onClick={handleSaveNote}
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            className="bg-gray-500 text-white px-4 py-1 rounded"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit
+          </button>
+        )}
+
 
         {activeNoteId ? (
           <textarea
             className="note-textarea"
             value={noteContent}
             onChange={handleContentChange}
+            disabled={!isEditing}
             placeholder="Start writing your note..."
           />
         ) : (

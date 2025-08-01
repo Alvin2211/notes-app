@@ -10,7 +10,7 @@ export const verifyJWT = async(req, _, next) => {
 
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
         if (!token) {
-            throw new ApiError(401, "Unauthorised request")
+            throw new ApiError(401, "Unauthorised request, no access token provided")
         }
     
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
@@ -19,7 +19,7 @@ export const verifyJWT = async(req, _, next) => {
     
         if (!user) {
             
-            throw new ApiError(401, "Invalid Access Token")
+            throw new ApiError(401, "Invalid Access Token, user not found")
         }
     
         req.user = user;

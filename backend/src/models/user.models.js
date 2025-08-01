@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcryptjs';
 import  jwt from 'jsonwebtoken';
+import {Note} from "./note.models.js";
 
 const userSchema = new mongoose.Schema({
     name:{
@@ -17,7 +18,12 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         reuired:true,
-    }
+    },
+    notes:[{
+        type: mongoose.Schema.Types.ObjectId,
+        Ref: 'Note'
+    }]
+
 },{timestamps: true});
 
 

@@ -80,3 +80,35 @@ h2 {
   font-size: 22px;
   letter-spacing: 1px;
 }
+
+.register_prompt {
+  text-align: center;
+  margin-top: 20px;
+  color: #aaa;
+}
+
+.register_prompt .register-link {
+  margin-left: 5px;
+  color: #3a86ff;
+  text-decoration: none;
+}
+
+.register_prompt .register-link:hover {
+  text-decoration: underline;
+}
+
+.home_prompt {
+  text-align: center;
+  margin-top: 20px;
+  color: #aaa;
+}
+
+.home_prompt .home-link {
+  margin-left: 5px;
+  color: #3a86ff;
+  text-decoration: none;
+}
+
+.home_prompt .home-link:hover {
+  text-decoration: underline;
+}

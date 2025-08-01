@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 const app= express();
 
 app.use(cors({
-  origin: "http://localhost:3000", // your frontend domain
+  origin: true, // your frontend domain
   credentials: true               // this is crucial
 }));
 app.use(express.json());

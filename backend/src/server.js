@@ -1,25 +1,20 @@
-
-import {app} from './app.js';
+import 'dotenv/config'; // immediately loads .env into process.env
+import { app } from './app.js';
 import connectDB from './db/index.js';
 
-
+const PORT = process.env.PORT || 8000;
 
 connectDB()
-.then(()=>{
-    app.on('error', (error)=>{
-        console.log('ERROR OCCURRED:',err);
-        throw error
-    })
-
-    app.listen(process.env.PORT || 5000, () => {
-        console.log(`App is listening on port ${process.env.PORT || 8000}`);
+  .then(() => {
+    app.on('error', (error) => {
+      console.error('ERROR OCCURRED:', error);
     });
-})
 
-.catch((error)=>{
-    console.log("ERROR OCCURED:",error)
-    throw error
-})
-
-
-
+    app.listen(PORT, () => {
+      console.log(`App is listening on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('ERROR OCCURRED:', error);
+    process.exit(1);
+  });

@@ -53,7 +53,7 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { name,email, password } = req.body;
 
         if (!email && !password) {
             throw new ApiError(400, "Email and password are required");

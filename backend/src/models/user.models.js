@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         reuired:true,
     },
+    refreshToken:{
+        type: String,
+        default: null,
+    },
     notes:[{
         type: mongoose.Schema.Types.ObjectId,
         Ref: 'Note'

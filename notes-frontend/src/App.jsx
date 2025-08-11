@@ -7,7 +7,7 @@ import Login from './components/login/login.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './components/Register/Register.jsx'
 import NotFound from './components/Not_Found.jsx';
-import UserPortal from './components/dashboard/user_portal.jsx';  
+import UserPortal from './components/UserPortal.jsx';  
 
 
 function App() {

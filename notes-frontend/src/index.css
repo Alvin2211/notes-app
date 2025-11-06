@@ -1,17 +1,4 @@
-/* html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-color: #121212;
-  color: white;
-  font-family: sans-serif;
-} */
+@import "tailwindcss";
 
 
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  width: 100%;
-}
+

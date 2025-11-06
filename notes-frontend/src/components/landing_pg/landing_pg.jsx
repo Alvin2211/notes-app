@@ -17,8 +17,9 @@ const LandingPage = () => {
   };
 
   return (
+    
     <div className="landing-container">
-      <header className="landing-header">
+      <header className="landing-header ">
         <div className='logo-picture'>
           <img src="\eazynotes.png" alt="logo"  />
           <h1 className="logo">EazyNotes</h1>
@@ -42,11 +43,7 @@ const LandingPage = () => {
           <p>EazyNotes helps you keep track of your thoughts anytime, anywhere.</p>
           <button onClick={to_register}>Get Started</button>
         </div>
-        {/* <img
-          src="https://img.freepik.com/free-vector/hand-drawn-flat-design-notes-illustration_23-2149365025.jpg"
-          alt="notes illustration"
-          className="hero-image"
-        /> */}
+        
         <img
           src="\hero_pic.png"
           alt="notes illustration"

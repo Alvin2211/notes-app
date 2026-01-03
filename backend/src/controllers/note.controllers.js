@@ -14,7 +14,7 @@ export const createNote = async (req, res) => {
   res.status(201).json({ note });
 };
 
-// Update note content/title
+// Update title ya content
 export const updateNote = async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
@@ -30,7 +30,7 @@ export const updateNote = async (req, res) => {
   res.status(200).json({ note });
 };
 
-// Delete a note
+// note delete
 export const deleteNote = async (req, res) => {
   const { id } = req.params;
   const deleted = await Note.findOneAndDelete({ _id: id, user: req.user._id });

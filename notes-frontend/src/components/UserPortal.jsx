@@ -172,7 +172,7 @@ const UserPortal = () => {
     fetchNotes();
   }, [userInfo.id, isLoadingUser]);
 
-  // Apply theme attribute
+  //theme attribute
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
@@ -265,7 +265,7 @@ const UserPortal = () => {
         prev.map((note) =>
           note._id === activeNoteId ? { ...note, content: val } : note
         )
-      );
+      );  
     },
     [activeNoteId]
   );

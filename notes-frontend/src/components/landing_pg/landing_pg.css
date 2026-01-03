@@ -1,7 +1,15 @@
+.body_wrapper{
+  margin:10px 10px;
+  padding: 10px 5px;
+  
+
+}
+
 .landing-container {
   font-family: 'Segoe UI', sans-serif;
   color: #e0e0e0;
-  background-color: black;
+  
+  height: 100vh;
 }
 
 /* Header */
@@ -10,10 +18,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color: black; 
   color: white;
-  box-shadow: 0px 2px 5px black;
-  /* position: sticky; */
   flex-wrap: wrap;
   animation: fadeSlideDown 0.8s ease-out;
   animation-fill-mode: forwards;
@@ -23,7 +28,7 @@
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #3a86ff;
+  color: #ffffff;
 }
 
 .nav-links {
@@ -56,8 +61,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 60px 40px;
-  /* background-color: #1e1e1e; */
+  padding: 30px 60px;
   flex-wrap: wrap;
 }
 
@@ -72,20 +76,21 @@
 .hero-text h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: #f1f1f1;
+  color: #ffffff;
 }
 
 .hero-text p {
   font-size: 1.1rem;
   margin-bottom: 30px;
-  color: #aaaaaa;
+  color: #d6d6d6;
 }
 
 .hero-text button {
   padding: 12px 24px;
   font-size: 1rem;
-  background-color: #3a86ff;
+  background-color: #6400bb;
   color: #fff;
+  font-weight:500;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -94,7 +99,7 @@
 
 
 .hero-text button:hover {
-  background-color: #2b6cfb;
+  background-color: #30005b;
   transform: translateY(-2px);
 }
 
@@ -140,7 +145,6 @@
 
 
 
-/* Animate it from the top */
 @keyframes fadeSlideDown {
   from {
     opacity: 0;
@@ -152,7 +156,7 @@
   }
 }
 
-/* Make sure links are visible */
+
 .nav-links a {
   color: #eee;
   text-decoration: none;
@@ -161,11 +165,11 @@
 }
 
 .nav-links a:hover {
-  color: #3a86ff;
+  color: #000000;
 }
 
 
-/* Responsive Adjustments */
+
 
 @media (max-width: 768px) {
   .hamburger {
@@ -178,31 +182,28 @@
   .nav-links-show {
     display: flex;
   }   
-}
 
-  
-
-
-
-@media (max-width: 1024px) {
-  .hero-text {
-    max-width: 60%;
+  .hero-image{
+    display: none;
   }
-  .hero-image {
-    max-width: 35%;
-  }
-}
 
-@media (max-width: 768px) {
-  .landing-header {
+  .landing-container{
+    display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
+  
+  }
+
+  .landing-header {
+    flex-direction: row;
+    padding:20px 20px;
   }
 
   .hero-section {
     flex-direction: column;
     text-align: center;
     padding: 40px 20px;
+    
   }
 
   .hero-text, .hero-image {
@@ -220,7 +221,19 @@
   .hero-text p {
     font-size: 1rem;
   }
+  
 }
+
+@media (max-width: 1024px) {
+  .hero-text {
+    max-width: 60%;
+  }
+  .hero-image {
+    max-width: 35%;
+  }
+}
+
+
 
 @media (max-width: 480px) {
   .landing-header {
@@ -258,6 +271,7 @@
 /* Logo Picture */
 .logo-picture {
   display: flex;
+  gap:5px;
   align-items: center;
   justify-content: center;
   margin-right: 20px;
@@ -274,13 +288,14 @@
   border-radius: 4px;
   cursor: pointer;
   transition: transform 0.2s ease;
-  background-color: #3a86ff;
+  background-color: #6400bb;
   color: white;
-  border: solid 1px #3a86ff;
-  padding: 2px;
+  border: solid 1px #6400bb;
+  padding: 2px 10px;
 }
 
 .register-btn:hover {
   transform: translateY(-2px);
-  background-color: #2b6cfb;
+  background-color:#30005b;
+  border: solid 1px #30005b;
 }

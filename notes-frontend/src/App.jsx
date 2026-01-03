@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './App.css'
+
 // import { Nav } from 'react-bootstrap'
 // import NavBar from './components/navbar.jsx'
 import LandingPage from './components/landing_pg/landing_pg.jsx'

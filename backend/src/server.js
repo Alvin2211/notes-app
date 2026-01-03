@@ -1,4 +1,4 @@
-import 'dotenv/config'; // immediately loads .env into process.env
+import 'dotenv/config'; 
 import { app } from './app.js';
 import connectDB from './db/index.js';
 

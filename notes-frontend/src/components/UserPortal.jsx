@@ -189,13 +189,12 @@ const UserPortal = () => {
 
   const addNote = useCallback(() => {
     const newNote = {
-      _id: `temp_${Date.now()}`, // Temporary ID for local state
+      _id: `temp_${Date.now()}`, 
       title: `Untitled ${nextUntitled}`,
       content: '',
-      isNew: true // Flag to indicate this is a new note not yet saved
+      isNew: true 
     };
-    setNotes((prev) => [newNote, ...prev]); // Add to beginning for recent-first order
-    setActiveNoteId(newNote._id);
+    setNotes((prev) => [newNote, ...prev]); 
     setNoteContent('');
     setNextUntitled((n) => n + 1);
     setIsRenaming(false);

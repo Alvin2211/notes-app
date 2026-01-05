@@ -1,4 +1,3 @@
-// UserPortal.jsx
 import React, { useState, useEffect, useCallback } from 'react';
 import "../styles/UserPortal.css";
 import { Plus, Trash2, Edit3, Sun, Moon, LogOut, Save } from 'lucide-react';
@@ -89,7 +88,6 @@ const UserPortal = () => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const navigate = useNavigate();
 
-  // Fetch user info from cookies/server on component mount
   useEffect(() => {
     const fetchUserInfo = async () => {
       setIsLoadingUser(true);
@@ -100,7 +98,6 @@ const UserPortal = () => {
           
         });
          
-        console.log('User info response:', response);
 
         if (!response.ok) {
           if (response.status === 401) {
@@ -118,7 +115,6 @@ const UserPortal = () => {
           });
         }
       } catch (error) {
-        console.error('Error fetching user info:', error);
         navigate('/');
       } finally {
         setIsLoadingUser(false);
@@ -128,7 +124,6 @@ const UserPortal = () => {
     fetchUserInfo();
   }, [navigate]);
 
-  // Fetch notes from database after user info is loaded
   useEffect(() => {
     if (!userInfo.id || isLoadingUser) return;
 
@@ -152,7 +147,6 @@ const UserPortal = () => {
         if (result.notes && Array.isArray(result.notes)) {
           setNotes(result.notes);
           
-          // Find the highest untitled number to continue the sequence
           const untitledNumbers = result.notes
             .filter(note => note.title.match(/^Untitled \d+$/))
             .map(note => parseInt(note.title.replace('Untitled ', '')))
@@ -163,7 +157,6 @@ const UserPortal = () => {
           }
         }
       } catch (error) {
-        console.error('Error fetching notes:', error);
       } finally {
         setIsLoadingNotes(false);
       }
@@ -172,12 +165,10 @@ const UserPortal = () => {
     fetchNotes();
   }, [userInfo.id, isLoadingUser]);
 
-  //theme attribute
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
-  // Sync navbar temp title when active note changes
   useEffect(() => {
     const active = notes.find((n) => n._id === activeNoteId);
     if (active) {
@@ -204,7 +195,6 @@ const UserPortal = () => {
     async (id) => {
       const noteToDelete = notes.find(n => n._id === id);
       
-      // If it's a new note (not saved to DB), just delete locally
       if (noteToDelete?.isNew) {
         setNotes((prev) => prev.filter((note) => note._id !== id));
         if (activeNoteId === id) {
@@ -215,7 +205,7 @@ const UserPortal = () => {
         return;
       }
 
-      // If it's an existing note, delete from database first
+      
       try {
         const response = await fetch(`http://localhost:8000/api/notes/${id}`, {
           method: 'DELETE',
@@ -231,10 +221,10 @@ const UserPortal = () => {
 
         console.log('Note deleted from database successfully');
         
-        // Remove from local state
+        
         setNotes((prev) => prev.filter((note) => note._id !== id));
         
-        // Clear active note if it was the one being deleted
+        
         if (activeNoteId === id) {
           setActiveNoteId(null);
           setNoteContent('');
@@ -243,7 +233,6 @@ const UserPortal = () => {
         setIsRenaming(false);
         
       } catch (error) {
-        console.error('Error deleting note from database:', error);
         alert('Failed to delete note from database. Please try again.');
       }
     },
@@ -281,61 +270,61 @@ const UserPortal = () => {
     [activeNoteId]
   );
 
-  const saveNote = useCallback(async () => {
-    if (!activeNoteId || !userInfo.id) return;
-    
-    const activeNote = notes.find(n => n._id === activeNoteId);
-    if (!activeNote) return;
+  const saveNotes = useCallback(async () => {
+  if (!userInfo.id || notes.length === 0) return;
 
-    setIsSaving(true);
-    
-    const isNewNote = activeNote.isNew;
-    const method = isNewNote ? 'POST' : 'PUT';
-    const endpoint = isNewNote ? 'http://localhost:8000/api/notes' : `http://localhost:8000/api/notes/${activeNoteId}`;
-    
-    try {
-      const response = await fetch(endpoint, {
-        method: method,
+  setIsSaving(true);
+
+  try {
+    const requests = notes.map(async note => {
+      const isNew = note.isNew;
+      const method = isNew ? 'POST' : 'PUT';
+      const endpoint = isNew
+        ? 'http://localhost:8000/api/notes'
+        : `http://localhost:8000/api/notes/${note._id}`;
+
+      const res = await fetch(endpoint, {
+        method,
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: activeNote.title,
-          content: activeNote.content,
+          title: note.title,
+          content: note.content,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!res.ok) {
+        throw new Error(`Failed to save note ${note._id}`);
       }
+      const data = await res.json();
+      return await data.note;
+    });
 
-      const result = await response.json();
-      console.log(`Note ${isNewNote ? 'created' : 'updated'} successfully:`, result);
-      
-      // Update the note in local state with server data
-      if (result.note) {
-        setNotes(prev => 
-          prev.map(note => 
-            note._id === activeNoteId 
-              ? { ...result.note, isNew: false } // Remove the isNew flag and use server data
-              : note
-          )
-        );
-        
-        // Update activeNoteId if it was a new note (server will have assigned new _id)
-        if (isNewNote && result.note._id !== activeNoteId) {
-          setActiveNoteId(result.note._id);
-        }
+    const savedNotes = await Promise.all(requests);
+
+    setNotes(
+      savedNotes.map(note => ({
+        ...note,
+        isNew: false,
+      }))
+    );
+
+    
+    if (activeNoteId) {
+      const stillExists = savedNotes.find(n => n._id === activeNoteId);
+      if (!stillExists) {
+        setActiveNoteId(savedNotes[0]?._id || null);
       }
-      
-    } catch (error) {
-      console.error(`Error ${isNewNote ? 'creating' : 'updating'} note:`, error);
-      alert(`Failed to ${isNewNote ? 'save' : 'update'} note. Please try again.`);
-    } finally {
-      setIsSaving(false);
     }
-  }, [activeNoteId, notes, userInfo.id]);
+
+  } catch (error) {
+    alert('Failed to save all notes. Please try again.');
+  } finally {
+    setIsSaving(false);
+  }
+}, [notes, userInfo.id, activeNoteId]);
+
 
   const startNavbarRename = () => {
     if (!activeNoteId) return;
@@ -360,6 +349,8 @@ const UserPortal = () => {
   };
 
   const handleLogout = async () => {
+    alert('Logging out will save all your notes to the database.');
+    await saveNotes();
     try {
       const response = await fetch('http://localhost:8000/api/v1/users/logout', {
         method: 'POST',
@@ -373,17 +364,14 @@ const UserPortal = () => {
         console.error('Logout failed:', response.status);
       }
       
-      // Clear local state regardless of API response
       setUserInfo({ name: 'Guest', id: null });
       setNotes([]);
       setActiveNoteId(null);
       setNoteContent('');
       
-      // Navigate to login page
       navigate('/');
     } catch (error) {
       console.error('Error during logout:', error);
-      // Still navigate to login even if logout API fails
       navigate('/');
     }
   };
@@ -445,7 +433,7 @@ const UserPortal = () => {
               <>
                 <button
                   className="icon-btn save-btn"
-                  onClick={saveNote}
+                  onClick={saveNotes}
                   disabled={isSaving}
                   aria-label="Save note"
                   title="Save note to database"

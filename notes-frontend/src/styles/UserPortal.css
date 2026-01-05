@@ -1,18 +1,18 @@
 :root {
-  --sidebar-bg: #c8c8c8;
-  --tab-bg: #aaaaaa;
-  --tab-border: #6c6c6c;
-  --tab-active-bg: #e3f2ff;
+  --sidebar-bg: #e5d0ff;
+  --tab-bg: #e5d0ff;
+  --tab-border: #cca3ff;
+  --tab-active-bg: #cca3ff;
   --text-default: #202020;
-  --muted: #c8c8c8;
+  --muted: #e5d0ff;
   --radius: 8px;
   --shadow: 0 4px 18px rgba(31,45,58,0.08);
   --transition: 0.2s ease;
-  --accent: #414141;
-  --navbar-bg: #c8c8c8;
-  --navbar-border: #6c6c6c;
-  --body-bg: #6c6c6c;
-  --editor-bg:#c8c8c8;
+  --accent: #ae6dff;
+  --navbar-bg: #e5d0ff;
+  --navbar-border: #e5d0ff;
+  --body-bg: #cca3ff;
+  --editor-bg:#e5d0ff;
 }
 
 [data-theme="dark"] {

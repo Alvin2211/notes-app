@@ -7,7 +7,10 @@ import cookieParser from 'cookie-parser';
 const app =express();
 
 app.use(cors({
-  origin: true, 
+  origin: [
+    "http://localhost:8000", //dev 
+    process.env.FRONTEND_URL || "https://eazynotes-ivory.vercel.app/" //prod
+  ], 
   credentials:true 
 })
 );

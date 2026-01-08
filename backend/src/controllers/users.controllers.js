@@ -56,7 +56,7 @@ const loginUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        if (!email && !password) {
+        if (!email || !password) {
             throw new ApiError(400, "Email and password are required");
         }
 
@@ -74,13 +74,12 @@ const loginUser = async (req, res) => {
 
         const { accessToken, refreshToken } = await generateTokens(user._id)
 
-        const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+        const loggedInUser = await User.findById(user._id).select("-password -refreshToken -accessToken -notes")
 
         const options = {
             httpOnly: true,
-            secure: false, // Set to true in production
-            sameSite: "strict", // Adjust based on your needs
-
+            secure: true, 
+            sameSite: "none",  
         }
 
         return res
@@ -90,8 +89,6 @@ const loginUser = async (req, res) => {
             .json({
                 success: true,
                 message: "User logged in successfully",
-                accessToken,
-                refreshToken,
                 user: loggedInUser,
             });
 
@@ -122,8 +119,8 @@ const logoutUser = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: "production" === process.env.NODE_ENV,
-            sameSite: "strict",
+            secure: true ,
+            sameSite: "none",
         }
 
         return res
@@ -171,7 +168,8 @@ const refreshAccessToken = async (req, res) =>{
     
         const options = {
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: "none",
         }
     
         const {accessToken, newRefreshToken} = await generateTokens(user._id)
@@ -183,7 +181,7 @@ const refreshAccessToken = async (req, res) =>{
         .json({
             success: true,
             message: "Access token refreshed successfully",
-            accessToken,
+            
         })}
         catch (error) {
         throw new ApiError(401, error?.message || "Invalid refresh token")
@@ -192,7 +190,7 @@ const refreshAccessToken = async (req, res) =>{
 }
     
 
-// Add this to users.controllers.js
+
 const getCurrentUser = async (req, res) => {
     try {
         return res.status(200).json({
@@ -209,7 +207,7 @@ const getCurrentUser = async (req, res) => {
     }
 };
 
-// Export it
+
 export { registerUser, loginUser, logoutUser, getCurrentUser, refreshAccessToken };
 
 

@@ -1,35 +1,7 @@
-// import React from 'react';
-// import './login.css';
-// import { Link } from 'react-router-dom';
 
-// const Login = () => {
-//   return (
-//     <>
-//       <div className='body_wrapper'>
-//         <div className='login_container'>
-//           <h2>Login Page</h2>
-//           <form action="" className='login_form'>
-//             <div className='input_container'>
-//               <input type="email" className="user_input" placeholder='Enter your Email' required />
-//               <input type="password" className='user_input' placeholder='Enter Password' required/>
-//               <button type="submit" className='Submit_btn'>Login</button>
-//             </div>
-//           </form>
-//           <p className='register_prompt'>Don't have an account? 
-//             <a href="/register" className="register-link">Register</a>
-//           </p>
-//           <p className='home_prompt'>Go back to 
-//             <Link to="/" className="home-link">Home</Link> 
-//           </p>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Login;
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+const API = import.meta.env.VITE_API_BASE_URL;
 import './login.css';
 
 const Login = () => {
@@ -41,9 +13,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/users/login", {
+      const response = await fetch(`${API}/api/v1/users/login`, {
         method: 'POST',
-        credentials: 'include', // to send cookies
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },

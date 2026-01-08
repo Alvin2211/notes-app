@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
+const API = import.meta.env.VITE_API_BASE_URL;
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -35,12 +36,12 @@ const Register = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/register", {
+      const res = await fetch(`${API}/api/v1/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // for cookie support
+        credentials: "include", 
         body: JSON.stringify({ name, email, password }),
       });
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import "../styles/UserPortal.css";
 import { Plus, Trash2, Edit3, Sun, Moon, LogOut, Save } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
+const API= import.meta.env.VITE_API_BASE_URL;
 
 const NoteTab = ({ note, isActive, onSelect, onDelete, onRename }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -92,7 +93,7 @@ const UserPortal = () => {
     const fetchUserInfo = async () => {
       setIsLoadingUser(true);
       try {
-        const response = await fetch('http://localhost:8000/api/v1/users/current-user', {
+        const response = await fetch(`${API}/api/v1/users/current-user`, {
           method: 'GET',
           credentials: 'include',
           
@@ -130,7 +131,7 @@ const UserPortal = () => {
     const fetchNotes = async () => {
       setIsLoadingNotes(true);
       try {
-        const response = await fetch('http://localhost:8000/api/notes', {
+        const response = await fetch(`${API}/api/notes`, {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -207,7 +208,7 @@ const UserPortal = () => {
 
       
       try {
-        const response = await fetch(`http://localhost:8000/api/notes/${id}`, {
+        const response = await fetch(`${API}/api/notes/${id}`, {
           method: 'DELETE',
           credentials: 'include',
           headers: {
@@ -218,9 +219,7 @@ const UserPortal = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        console.log('Note deleted from database successfully');
-        
+    
         
         setNotes((prev) => prev.filter((note) => note._id !== id));
         
@@ -280,8 +279,8 @@ const UserPortal = () => {
       const isNew = note.isNew;
       const method = isNew ? 'POST' : 'PUT';
       const endpoint = isNew
-        ? 'http://localhost:8000/api/notes'
-        : `http://localhost:8000/api/notes/${note._id}`;
+        ? `${API}/api/notes`
+        : `${API}/api/notes/${note._id}`;
 
       const res = await fetch(endpoint, {
         method,
@@ -352,7 +351,7 @@ const UserPortal = () => {
     alert('Logging out will save all your notes to the database.');
     await saveNotes();
     try {
-      const response = await fetch('http://localhost:8000/api/v1/users/logout', {
+      const response = await fetch(`${API}/api/v1/users/logout`, {
         method: 'POST',
         credentials: 'include',
         headers: {

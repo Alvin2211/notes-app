@@ -11,16 +11,16 @@ const router = Router();
 
 router.use(verifyJWT);
 
-// GET /api/notes?userName=UserName - Fetch user notes
+//fetching the notes api
 router.get("/", getUserNotes);
 
-// POST /api/notes - Create new note
+//creating new note api 
 router.post("/", createNote);
 
-// PUT /api/notes/:id - Update existing note
+//updating new note api
 router.put("/:id", updateNote);
 
-// DELETE /api/notes/:id - Delete note
+//Deleting new note api 
 router.delete("/:id", deleteNote);
 
 export default router;

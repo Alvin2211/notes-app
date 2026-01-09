@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Register.css';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 const API= import.meta.env.VITE_API_BASE_URL;
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,7 +50,7 @@ const Register = () => {
 
       if (res.ok) {
         alert("Registration successful!");
-        window.location.href = '/login';  
+        navigate('/login'); 
       } else {
         alert(data.message || "Registration failed.");
       }

@@ -1,16 +1,12 @@
 import React, { use } from 'react';
 import './landing_pg.css';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
-const to_register = () => {
-  window.location.href = '/register';
-};
-
 
 
 const LandingPage = () => {
-
+  const navigate = useNavigate();
   const [showMenu, setshowMenu] = useState(false);
   const handlehamburgerClick = () => {
     setshowMenu(!showMenu);
@@ -48,9 +44,10 @@ const LandingPage = () => {
           <a href="#">Home</a>
           <a href="#">Features</a>
           <Link to="/login" className="login-link">Login</Link>
-          <button className="register-btn" onClick={to_register}>
+          <button className="register-btn" onClick={() => navigate('/register')}>
             Sign Up
           </button>
+          
         </nav>
       </header>
 
@@ -60,7 +57,7 @@ const LandingPage = () => {
           <p>
             EazyNotes helps you keep track of your thoughts anytime, anywhere.
           </p>
-          <button onClick={to_register}>Get Started</button>
+          <button onClick={()=> navigate('/register')}>Get Started</button>
         </div>
 
         <img

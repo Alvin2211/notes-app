@@ -12,10 +12,9 @@ EasyNotes is a MERN-adjacent web application built with React on the frontend an
 
 ## Project Snippets
 
-![Landing Page](screenshots/landing.png)
-![Sign Up](screenshots/signup.png)
-![Login](screenshots/login.png)
-![Dashboard](screenshots/dashboard.png)
+<img src="screenshots/landing.png" width="45%"/> <img src="screenshots/signup.png" width="45%"/>
+<img src="screenshots/login.png" width="45%"/> <img src="screenshots/dashboard.png" width="45%"/>
+
 
 ---
 
